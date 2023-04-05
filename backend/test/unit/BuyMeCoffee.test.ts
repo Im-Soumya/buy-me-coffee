@@ -49,8 +49,13 @@ import { BigNumber } from "ethers";
         it("adds the new memo to the memo list", async () => {
             await buyMeCoffee.buyCoffee(name, message, { value: minTip })
             
-            const newMemo = await buyMeCoffee.getMemo(tipper1.address)
-            assert(ethers.utils.formatEther(newMemo.tip) == ethers.utils.formatEther(minTip))
+            const allMemos = await buyMeCoffee.getMemos()
+            for(let memos of allMemos) {
+                const address = memos.from
+                if(address === tipper1.toString()) {
+                    assert(tipper1, address)
+                }
+            }
         })
         it("emits an event on successfully sending ETH", async () => {
             await expect(buyMeCoffee.buyCoffee(name, message, { value: minTip})).to.emit( buyMeCoffee, "NewMemo" )

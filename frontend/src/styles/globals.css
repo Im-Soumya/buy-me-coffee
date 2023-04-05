@@ -1,3 +1,5 @@
+@import url("https://api.fontshare.com/v2/css?f[]=satoshi@700,500,400&display=swap");
+
 :root {
   --max-width: 1100px;
   --border-radius: 12px;

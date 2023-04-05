@@ -8,6 +8,7 @@ error BuyMeCoffee__TransferFailed();
 
 contract BuyMeCoffee {
     struct Memo {
+        address from;
         string name;
         string message;
         uint256 timestamp;
@@ -15,7 +16,7 @@ contract BuyMeCoffee {
     }
 
     address payable public owner;
-    mapping(address => Memo) public memos;
+    Memo[] private memos;
 
     modifier onlyOwner() {
         if (!(msg.sender == owner)) {
@@ -41,7 +42,7 @@ contract BuyMeCoffee {
             revert BuyMeCoffee__NotEnoughETH();
         }
 
-        memos[msg.sender] = Memo(_name, _message, block.timestamp, msg.value);
+        memos.push(Memo(msg.sender, _name, _message, block.timestamp, msg.value));
         emit NewMemo(msg.sender, block.timestamp, _name, _message, msg.value);
     }
 
@@ -56,7 +57,7 @@ contract BuyMeCoffee {
         }
     }
 
-    function getMemo(address _address) public view returns (Memo memory) {
-        return memos[_address];
+    function getMemos() public view returns (Memo[] memory) {
+        return memos;
     }
 }
