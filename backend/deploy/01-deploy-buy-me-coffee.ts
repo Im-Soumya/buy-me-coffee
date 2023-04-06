@@ -1,6 +1,7 @@
 import { DeployFunction } from "hardhat-deploy/types"
 import  { HardhatRuntimeEnvironment } from "hardhat/types"
 import verify from "../utils/verify"
+import { developmentChains } from "../helper-hardhat-config"
 
 const deployBuyMeCoffee: DeployFunction = async (hre: HardhatRuntimeEnvironment) => {
     const { deployments, getNamedAccounts, network, ethers } = hre
@@ -18,7 +19,7 @@ const deployBuyMeCoffee: DeployFunction = async (hre: HardhatRuntimeEnvironment)
     
     log("-------------------------------")
 
-    if(network.name === "sepolia" && process.env.ETHERSCAN_API_KEY) {
+    if(!developmentChains.includes(network.name) && process.env.ETHERSCAN_API_KEY) {
         log("Verifying...")
         await verify(buyMeCoffee.address, [])
     }

@@ -3,8 +3,9 @@ import { deployments, ethers, network } from "hardhat";
 import { BuyMeCoffee } from "../../typechain-types";
 import { assert, expect } from "chai";
 import { BigNumber } from "ethers";
+import { developmentChains } from "../../helper-hardhat-config";
 
-!(network.name === "localhost" || network.name === "hardhat")
+!developmentChains.includes(network.name)
 ? describe.skip
 : describe("Buy Me Coffee unit tests", () => {
     let buyMeCoffee: BuyMeCoffee
