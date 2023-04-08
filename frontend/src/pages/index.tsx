@@ -2,6 +2,7 @@ import Head from 'next/head'
 import { Box } from "@chakra-ui/react"
 
 import { DEFAULT_FONT_SIZES } from '@/lib/constants/ui'
+import Navbar from '@/components/Navbar'
 import Hero from '@/components/Hero'
 
 export default function Home() {
@@ -19,16 +20,10 @@ export default function Home() {
           minW="full"
           bg="primary"
           color="white"
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
           fontSize={DEFAULT_FONT_SIZES}
           overflowX="hidden"
-          py={{
-            base: "10",
-            md: "20",
-          }}
         >
+          <Navbar />
           <Hero />
         </Box>
       </main>
