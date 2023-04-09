@@ -7,8 +7,9 @@ const Navbar = () => {
         <Button 
             bg="teal.200" 
             color="neutral.900" 
+            borderRadius={{ base: "10px", md: "12px" }}
             fontSize={{ base: "xs", md: "sm" }}
-            _hover={{ bg: "emerald.100" }}
+            _hover={{ bg: "teal.100" }}
         >
             Connect Wallet
         </Button>
