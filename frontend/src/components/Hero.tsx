@@ -12,6 +12,20 @@ const Hero = () => {
         <Flex direction="column" alignItems="center" gap={{ base: "4", md: "6" }}>
           <Flex gap={{ base: "4", md: "6" }}>
             <Button 
+              bg="teal.300"
+              color="neutral.900"
+              borderWidth="1px"
+              borderColor="teal.200"
+              borderRadius={{ base: "12px", md: "16px" }}
+              px={{ base: "5", md: "6" }}
+              py={{ base: "5", md: "6" }}
+              fontSize={{ base: "xs", md: "md", lg: "lg" }}
+              _hover={{ bg: "teal.100", color: "neutral.800", boxShadow: "0px 3px 30px 21px", transitionDuration: "300ms" }}
+              onClick={onOpen}
+            >
+              Regular coffee
+            </Button>
+            <Button 
               bg="transparent"
               color="teal.200"
               borderWidth="1px"
@@ -23,25 +37,11 @@ const Hero = () => {
               _hover={{ bg: "teal.100", color: "neutral.800", boxShadow: "0px 3px 30px 21px", transition: "all 300ms" }}
               onClick={onOpen}
             >
-              Regular coffee
-            </Button>
-            <Button 
-              bg="teal.200"
-              color="neutral.800"
-              borderWidth="1px"
-              borderColor="teal.200"
-              borderRadius={{ base: "12px", md: "16px" }}
-              px={{ base: "5", md: "6" }}
-              py={{ base: "5", md: "6" }}
-              fontSize={{ base: "xs", md: "md", lg: "lg" }}
-              _hover={{ bg: "teal.100", color: "neutral.800", boxShadow: "0px 3px 30px 21px", transitionDuration: "300ms" }}
-              onClick={onOpen}
-            >
               Large coffee
             </Button>
           </Flex>
 
-          <Text fontSize={{ base: "xs", md: "md" }} color="neutral.500">See other memos</Text>
+          <Text fontSize={{ base: "sm", md: "md" }} color="neutral.500">See other memos</Text>
         </Flex>
 
         <Modal isOpen={isOpen} onClose={onClose} isCentered motionPreset="slideInBottom">
