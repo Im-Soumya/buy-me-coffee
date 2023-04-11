@@ -31,7 +31,7 @@ const Navbar = () => {
   }, [])
 
   return (
-    <Flex w="full" alignItems="center" justifyContent="space-between" py="5" px={{ base: "5", md: "20" }}>
+    <Flex w="full" position="fixed" alignItems="center" justifyContent="space-between" py="5" px={{ base: "5", md: "20" }}>
         <Flex gap={{ base: "3", md: "5" }}>
           <Link href="/">
             <Text fontWeight="700" _hover={{ textDecor: "underline" }}>buycoffee</Text>

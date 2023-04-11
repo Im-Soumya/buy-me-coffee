@@ -8,7 +8,7 @@ const Hero = () => {
   const { isOpen: largeIsOpen, onOpen: largeOnOpen, onClose: largeOnClose } = useDisclosure()
 
   return (
-    <Flex direction="column" h="65vh" alignItems="center" justifyContent="center" gap={{ base: "6", md: "10" }}>
+    <Flex direction="column" h="100vh" alignItems="center" justifyContent="center" gap={{ base: "6", md: "10" }}>
         <Flex direction="column" alignItems="center">
           <Heading size={{ base: "lg", sm: "xl", md: "2xl", lg: "3xl" }} color="teal.50" fontFamily="body">
               Buy Heisenberg a Coffee!
