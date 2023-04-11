@@ -1,6 +1,6 @@
 import { Flex, Text, Heading, Button, useDisclosure } from "@chakra-ui/react"
 
-import CustomModal from "./Modal"
+import CustomModal from "@/components/Misc/Modal"
 
 const Hero = () => {
   const { isOpen: regularIsOpen, onOpen: regularOnOpen, onClose: regularOnClose } = useDisclosure()

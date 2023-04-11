@@ -1,3 +1,4 @@
+import { FC } from "react"
 import { 
   Modal, 
   ModalOverlay, 
@@ -11,13 +12,13 @@ import {
   Button 
 } from "@chakra-ui/react"
 
-type Flags = {
+interface IModalProps {
   isOpen: boolean,
-  onClose: boolean, 
-  regular: boolean
+  onClose: any,
+  regular: boolean,
 }
 
-const CustomModal = ({ isOpen, onClose, regular }: Flags, ) => {
+const CustomModal: FC<IModalProps> = ({ isOpen, onClose, regular }) => {
   return (
   <Modal isOpen={isOpen} onClose={onClose} isCentered motionPreset="slideInBottom">
     <ModalOverlay />
