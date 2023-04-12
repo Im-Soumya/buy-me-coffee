@@ -17,8 +17,8 @@ export default function Home() {
       </Head>
       <main>
         <Box
-          minH="100vh"
           minW="full"
+          minH="100vh" 
           bg="primary"
           color="white"
           fontSize={DEFAULT_FONT_SIZES}

@@ -1,10 +1,10 @@
 import Link from 'next/link'
 import { useEffect } from 'react'
 import { useMoralis } from "react-moralis"
-import { Button, Flex, Text } from '@chakra-ui/react'
+import { Button, Flex, Text, Spinner } from '@chakra-ui/react'
 
 const Navbar = () => {
-  const { enableWeb3, account, Moralis, deactivateWeb3, isWeb3Enabled } = useMoralis()
+  const { enableWeb3, account, Moralis, deactivateWeb3, isWeb3Enabled, isWeb3EnableLoading } = useMoralis()
 
   const handleClick = () => {
     enableWeb3()
@@ -31,7 +31,7 @@ const Navbar = () => {
   }, [])
 
   return (
-    <Flex w="full" position="fixed" alignItems="center" justifyContent="space-between" py="5" px={{ base: "5", md: "20" }}>
+    <Flex w="full" position="absolute" alignItems="center" justifyContent="space-between" py="5" px={{ base: "5", md: "20" }}>
         <Flex gap={{ base: "3", md: "5" }}>
           <Link href="/">
             <Text fontWeight="700" _hover={{ textDecor: "underline" }}>buycoffee</Text>
@@ -59,7 +59,7 @@ const Navbar = () => {
           >
             <Text 
               as="span" 
-              fontSize="md"
+              fontSize={{ base: "xs", md: "md" }}
             >
               {account.slice(0, 6)}...{account.slice(account.length - 4)}
             </Text>
@@ -71,6 +71,7 @@ const Navbar = () => {
             borderRadius={{ base: "10px", md: "12px" }}
             fontSize={{ base: "xs", md: "sm" }}
             _hover={{ bg: "teal.100" }}
+            isLoading={isWeb3EnableLoading}
             onClick={handleClick}
           >
             Connect Wallet

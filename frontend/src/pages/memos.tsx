@@ -1,7 +1,7 @@
 import Head from "next/head"
 import { Box, Flex } from "@chakra-ui/react"
 
-import { DEFAULT_FONT_SIZES } from "@/lib/constants/ui"
+import { DEFAULT_FONT_SIZES, DEFAULT_X_PADDING } from "@/lib/constants/ui"
 import Navbar from "@/components/Sections/Navbar"
 import Memos from "@/components/Sections/Memos"
 
@@ -21,7 +21,6 @@ const memos = () => {
           bg="primary"
           color="white"
           fontSize={DEFAULT_FONT_SIZES}
-          overflowY="hidden"
         >
             <Flex direction="column" gap="10">
               <Navbar />

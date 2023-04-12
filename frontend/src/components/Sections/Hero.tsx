@@ -1,9 +1,12 @@
+import { useMoralis } from "react-moralis"
 import { Flex, Text, Heading, Button, useDisclosure } from "@chakra-ui/react"
 
 import CustomModal from "@/components/Misc/Modal"
 import Address from "@/components/Misc/Address"
 
 const Hero = () => {
+  const { account, isWeb3Enabled } = useMoralis()
+
   const { isOpen: regularIsOpen, onOpen: regularOnOpen, onClose: regularOnClose } = useDisclosure()
   const { isOpen: largeIsOpen, onOpen: largeOnOpen, onClose: largeOnClose } = useDisclosure()
 
@@ -13,10 +16,9 @@ const Hero = () => {
           <Heading size={{ base: "lg", sm: "xl", md: "2xl", lg: "3xl" }} color="teal.50" fontFamily="body">
               Buy Heisenberg a Coffee!
           </Heading>
-          <Text color="neutral.500" mt={{ base: "2", md: "5" }}><Address /></Text>
+          <Text color="neutral.500" maxW={{ base: "375px", md: "600px" }} align="center" fontSize={{ base: "xs", md: "sm" }} mt={{ base: "2", md: "8" }}>A decentralized "buy me a coffee" website. Try it out by sending a short message with a nickname or stay anonymous lol.</Text>
         </Flex>
-
-        <Flex direction="column" alignItems="center" gap={{ base: "4", md: "6" }}>
+ 
           <Flex gap={{ base: "4", md: "6" }}>
             <Button 
               bg="teal.300"
@@ -46,7 +48,6 @@ const Hero = () => {
             >
               Large coffee
             </Button>
-          </Flex>
         </Flex>
 
         {regularIsOpen ? (
