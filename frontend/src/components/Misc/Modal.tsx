@@ -42,7 +42,6 @@ const CustomModal: FC<IModalProps> = ({ isOpen, onClose, regular }) => {
   
   const {
     runContractFunction: buyCoffee,
-    data: txResponse,
     isLoading,
   } = useWeb3Contract({
     abi: abi,
@@ -98,10 +97,12 @@ const CustomModal: FC<IModalProps> = ({ isOpen, onClose, regular }) => {
   }
 
   const updateUI = async () => {
-    const regTip = ((await getRegularTip()) as BigNumberish).toString()
-    setRegularTip(regTip)
-    const lgTip = ((await getLargeTip()) as BigNumberish).toString()
-    setLargeTip(lgTip)
+    if(chainId in addresses) {
+      const regTip = ((await getRegularTip()) as BigNumberish).toString()
+      setRegularTip(regTip)
+      const lgTip = ((await getLargeTip()) as BigNumberish).toString()
+      setLargeTip(lgTip)
+    }
   }
 
   useEffect(() => {
