@@ -12,7 +12,8 @@ import { developmentChains } from "../../helper-hardhat-config";
     let buyMeCoffeeContract: BuyMeCoffee
     let accounts: SignerWithAddress[]
     let deployer: SignerWithAddress, tipper1: SignerWithAddress, tipper2: SignerWithAddress, tipper3: SignerWithAddress
-    let minTip: BigNumber
+    let regularTip: BigNumber
+    let largeTip: BigNumber
     let name: string
     let message: string
 
@@ -28,9 +29,10 @@ import { developmentChains } from "../../helper-hardhat-config";
         // @ts-ignore
         buyMeCoffeeContract = await ethers.getContract("BuyMeCoffee")
         buyMeCoffee = buyMeCoffeeContract.connect(deployer)
-        minTip = ethers.utils.parseEther("1")
-        name = "Tim"
-        message = "Hey"
+        regularTip = ethers.utils.parseEther("0.01")
+        largeTip = ethers.utils.parseEther("0.03")
+        name = "anonymous"
+        message = "Enjoy your coffee"
     })
 
     describe("constructor", () => {
@@ -40,15 +42,15 @@ import { developmentChains } from "../../helper-hardhat-config";
         })
     })
 
-    describe("buyCoffee", () => {
+    describe("buyRegularCoffee", () => {
         beforeEach(async () => {
             buyMeCoffee = buyMeCoffeeContract.connect(tipper1)
         })
         it("reverts if paid less", async () => {
-            await expect(buyMeCoffee.buyCoffee(name, message)).to.be.revertedWith("BuyMeCoffee__NotEnoughETH")
+            await expect(buyMeCoffee.buyRegularCoffee(name, message)).to.be.revertedWith("BuyMeCoffee__NotEnoughETH")
         })
         it("adds the new memo to the memo list", async () => {
-            await buyMeCoffee.buyCoffee(name, message, { value: minTip })
+            await buyMeCoffee.buyRegularCoffee(name, message, { value: regularTip })
             
             const allMemos = await buyMeCoffee.getMemos()
             for(let memos of allMemos) {
@@ -59,7 +61,45 @@ import { developmentChains } from "../../helper-hardhat-config";
             }
         })
         it("emits an event on successfully sending ETH", async () => {
-            await expect(buyMeCoffee.buyCoffee(name, message, { value: minTip})).to.emit( buyMeCoffee, "NewMemo" )
+            await expect(buyMeCoffee.buyRegularCoffee(name, message, { value: regularTip})).to.emit( buyMeCoffee, "NewMemo" )
+        })
+    })
+
+    describe("buyLargeCoffee", () => {
+        beforeEach(async () => {
+            buyMeCoffee = buyMeCoffeeContract.connect(tipper1)
+        })
+        it("reverts if paid less", async () => {
+            await expect(buyMeCoffee.buyLargeCoffee(name, message)).to.be.revertedWith("BuyMeCoffee__NotEnoughETH")
+            await expect(buyMeCoffee.buyLargeCoffee(name, message, { value: ethers.utils.parseEther("0.02") })).to.be.revertedWith("BuyMeCoffee__NotEnoughETH")
+        })
+        it("adds new memo to this list", async () => {
+            await buyMeCoffee.buyLargeCoffee(name, message, { value: largeTip })
+            
+            const allMemos = await buyMeCoffee.getMemos()
+            for(let memo of allMemos) {
+                const address = memo.from
+                if(address == tipper1.toString()) {
+                    assert(tipper1, address)
+                }
+            }
+        })
+        it("emits an event", async () => {
+            expect(await buyMeCoffee.buyLargeCoffee(name, message, { value: largeTip })).to.emit( buyMeCoffee, "NewMemo" )
+        })
+    })
+
+    describe("getRegularTip", () => {
+        it("the regular tip", async () => {
+            const regTip = await buyMeCoffee.getRegularTip()
+            assert(regTip, "0.01")
+        })
+    })
+
+    describe("getLargeTip", () => {
+        it("the regular tip", async () => {
+            const lgTip = await buyMeCoffee.getLargeTip()
+            assert(lgTip, "0.03")
         })
     })
 
@@ -73,7 +113,7 @@ import { developmentChains } from "../../helper-hardhat-config";
         })
         it("transfers funds to owner", async () => {
             buyMeCoffee = buyMeCoffeeContract.connect(tipper1)
-            await buyMeCoffee.buyCoffee(name, message, { value: minTip })
+            await buyMeCoffee.buyRegularCoffee(name, message, { value: regularTip })
 
             buyMeCoffee = buyMeCoffeeContract.connect(deployer)
             await buyMeCoffee.withdraw()
@@ -87,7 +127,7 @@ import { developmentChains } from "../../helper-hardhat-config";
             let addresses = [tipper1, tipper2, tipper3]
             for(let address of addresses) {
                 buyMeCoffee = buyMeCoffeeContract.connect(address)
-                await buyMeCoffee.buyCoffee(name, message, {value: minTip})
+                await buyMeCoffee.buyRegularCoffee(name, message, {value: regularTip})
             }
             const contractBalance = ethers.utils.formatEther(await ethers.provider.getBalance(buyMeCoffee.address))
 
