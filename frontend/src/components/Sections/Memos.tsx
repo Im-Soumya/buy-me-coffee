@@ -67,7 +67,7 @@ const Memos = () => {
         )
         : (
           <Flex>
-            <Text color="neutral.300">Connect your wallet to check the memos out.</Text>
+            <Text color="neutral.300">Nothing to see here for now.</Text>
           </Flex>
         )
       }

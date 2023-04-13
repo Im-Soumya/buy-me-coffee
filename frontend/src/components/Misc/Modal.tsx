@@ -70,8 +70,8 @@ const CustomModal: FC<IModalProps> = ({ isOpen, onClose, regular }) => {
 
   const handleSuccess = async () => {
     toast({
-      title: `Successfully sent ${regular ? ethers.formatEther(regularTip.toString()) : ethers.formatEther(largeTip.toString())} ETH`,
-      description: `${regular ? ethers.formatEther(regularTip.toString()) : ethers.formatEther(largeTip.toString())} ETH has been sent. Please wait for few seconds and check the memo section.`,
+      title: `Successfully sent ${regular ? ethers.formatEther(regularTip) : ethers.formatEther(largeTip)} ETH`,
+      description: `${regular ? ethers.formatEther(regularTip) : ethers.formatEther(largeTip)} ETH has been sent. Please wait, it may take some time to see your memo in the memos section.`,
       status: "success",
       duration: 5000,
       isClosable: true

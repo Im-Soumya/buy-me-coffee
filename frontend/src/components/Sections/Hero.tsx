@@ -10,22 +10,12 @@ interface IContractAddresses {
 }
 
 const Hero = () => {
-  const [ chain, setChain ] = useState<boolean>(false)
-
   const { isOpen: regularIsOpen, onOpen: regularOnOpen, onClose: regularOnClose } = useDisclosure()
   const { isOpen: largeIsOpen, onOpen: largeOnOpen, onClose: largeOnClose } = useDisclosure()
   
-  const { chainId: chainIdHex, Moralis } = useMoralis()
+  const { chainId: chainIdHex } = useMoralis()
   const addresses: IContractAddresses = contractAddresses
   const chainId: string = parseInt(chainIdHex!).toString()
-  const buyMeCoffeeAddress = chainId in addresses ? addresses[chainId][0] : null
-
-  useEffect(() => {
-    Moralis.onChainChanged((chainId) => {
-      console.log(`Chain switched to ${chainId}`)
-      setChain(chainId! in addresses)
-    })
-  }, [chainIdHex])
 
   return (
     <Flex direction="column" h="100vh" alignItems="center" justifyContent="center" gap={{ base: "6", md: "10" }}>
@@ -74,7 +64,7 @@ const Hero = () => {
               )
               : (
                 <Flex>
-                  <Text>Please switch your network!</Text>
+                  <Text color="teal.400" fontWeight="600">Please switch your network!</Text>
                 </Flex>
               )
             }
@@ -82,7 +72,7 @@ const Hero = () => {
           )
           : (
             <Flex>
-              <Text color="teal.600" fontWeight="600">Connect your wallet and explore!</Text>
+              <Text color="teal.400" fontWeight="600">Connect your wallet and explore!</Text>
             </Flex>
           )
         }
