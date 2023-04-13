@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react"
 import { useMoralis } from "react-moralis"
-import { Flex, Text, Heading, Button, useDisclosure } from "@chakra-ui/react"
+import { Flex, Link, Text, Heading, Button, useDisclosure } from "@chakra-ui/react"
 
 import CustomModal from "@/components/Misc/Modal"
 import { contractAddresses } from "../../../constants"
+import { GITHUB } from "@/lib/constants/urls"
 
 interface IContractAddresses {
   [key: string]: string[]
@@ -21,9 +21,17 @@ const Hero = () => {
     <Flex direction="column" h="100vh" alignItems="center" justifyContent="center" gap={{ base: "6", md: "10" }}>
         <Flex direction="column" alignItems="center">
           <Heading size={{ base: "lg", sm: "xl", md: "2xl", lg: "3xl" }} color="teal.50" fontFamily="body">
-              Buy Heisenberg a Coffee!
+            Buy Deathstalker a Coffee!
           </Heading>
-          <Text color="neutral.500" maxW={{ base: "375px", md: "600px" }} align="center" fontSize={{ base: "xs", md: "sm" }} mt={{ base: "2", md: "8" }}>A decentralized "buy me a coffee" website. Try it out by sending a short message with a nickname or stay anonymous lol.</Text>
+          <Text 
+            color="neutral.500" 
+            maxW={{ base: "375px", md: "600px" }} 
+            align="center" 
+            fontSize={{ base: "xs", md: "sm" }} 
+            mt={{ base: "2", md: "8" }}
+          >
+            A decentralized "buy me a coffee" website. Try it out by sending a short message with a nickname or stay anonymous lol. And Deathstalker? check <Link href={GITHUB} isExternal color="neutral.400">here</Link>.
+          </Text>
         </Flex>
  
         {chainIdHex
@@ -64,7 +72,7 @@ const Hero = () => {
               )
               : (
                 <Flex>
-                  <Text color="teal.400" fontWeight="600">Please switch your network to Sepolia or Goerli!</Text>
+                  <Text color="teal.400" fontWeight="600">Please switch your network to Sepolia!</Text>
                 </Flex>
               )
             }
