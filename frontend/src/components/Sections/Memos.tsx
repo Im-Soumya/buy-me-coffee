@@ -40,7 +40,7 @@ const Memos = () => {
     <Flex direction="column" py={{ base: "28", md: "32" }} px={{ base: "5", md: "20" }} gap={{ base: "6", md: "10" }}>
       <Heading fontSize={{ base: "md", sm: "xl", md: "2xl" }} fontFamily="body">Those who bought a coffee</Heading>
 
-      {memos.length > 0
+      {memos?.length > 0
         ? (
           <Grid templateColumns={{ base: "repeat(1, 1fr)", sm:"repeat(2, 1fr)", md: "repeat(3, 1fr)" }} gap={{ base: "5" }}>
             {memos.map((memo, index) => (
