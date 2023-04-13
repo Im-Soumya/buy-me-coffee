@@ -15,7 +15,7 @@ contract BuyMeCoffee {
         uint256 tip;
     }
 
-    address payable public owner;
+    address payable private owner;
     Memo[] private memos;
 
     uint256 private immutable i_regularTip;
@@ -81,5 +81,13 @@ contract BuyMeCoffee {
 
     function getLargeTip() public view returns (uint256) {
         return i_largeTip;
+    }
+
+    function getOwner() public view returns (address) {
+        return owner;
+    }
+
+    function getBalance() public view returns (uint256) {
+        return address(this).balance;
     }
 }

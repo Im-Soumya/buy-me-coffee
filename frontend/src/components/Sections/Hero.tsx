@@ -64,7 +64,7 @@ const Hero = () => {
               )
               : (
                 <Flex>
-                  <Text color="teal.400" fontWeight="600">Please switch your network!</Text>
+                  <Text color="teal.400" fontWeight="600">Please switch your network to Sepolia or Goerli!</Text>
                 </Flex>
               )
             }

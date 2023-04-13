@@ -21,10 +21,10 @@ export const networkConfig: INetworkConfigInfo = {
         regularTip: ethers.utils.parseEther("0.01").toString(),
         largeTip: ethers.utils.parseEther("0.03").toString(),
     },
-    80001: {
-        name: "mumbai",
+    5: {
+        name: "goerli",
         regularTip: ethers.utils.parseEther("0.01").toString(),
-        largeTip: ethers.utils.parseEther("0.03").toString(),
+        largeTip: ethers.utils.parseEther("0.03").toString()
     }
 }
 

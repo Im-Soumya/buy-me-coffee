@@ -37,7 +37,7 @@ import { developmentChains } from "../../helper-hardhat-config";
 
     describe("constructor", () => {
         it("sets the owner correctly", async () => {
-            const owner = await buyMeCoffee.owner()
+            const owner = await buyMeCoffee.getOwner()
             assert(owner, deployer.address)
         })
     })
@@ -100,6 +100,29 @@ import { developmentChains } from "../../helper-hardhat-config";
         it("the regular tip", async () => {
             const lgTip = await buyMeCoffee.getLargeTip()
             assert(lgTip, "0.03")
+        })
+    })
+
+    describe("getOwner", () => {
+        it("returns the owner of the contract", async () => {
+            const owner = await buyMeCoffee.getOwner()
+            assert(owner, deployer.address)
+        })
+    })
+
+    describe("getBalance", () => {
+        it("returns the balance 0 after deployment", async () => {
+            const balance = await buyMeCoffee.getBalance()
+            assert(balance, "0")
+        })
+        it("returns the balance after people funded", async () => {
+            buyMeCoffee = buyMeCoffeeContract.connect(tipper1)
+            await buyMeCoffee.buyRegularCoffee(name, message, { value: regularTip })
+            buyMeCoffee = buyMeCoffeeContract.connect(tipper2)
+            await buyMeCoffee.buyLargeCoffee(name, message, { value: largeTip })
+            const balance = await buyMeCoffee.getBalance()
+
+            assert(balance, (regularTip.add(largeTip)).toString())
         })
     })
 
