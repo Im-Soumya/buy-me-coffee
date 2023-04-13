@@ -16,6 +16,6 @@
 4. Chakra UI
 5. react-moralis hooks
 
-<p align="center">
+<p align="left">
     Collaboration to improve apppreciated.
 </p>
