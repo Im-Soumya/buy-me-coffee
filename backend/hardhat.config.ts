@@ -13,7 +13,6 @@ import { HardhatUserConfig } from "hardhat/config"
  */
 
 const SEPOLIA_RPC_URL = process.env.SEPOLIA_RPC_URL || "https://eth-sepolia.g.alchemy.com/v2/YOUR-API-KEY"
-const GOERLI_RPC_URL = process.env.GOERLI_RPC_URL || "https://eth-goerli.g.alchemy.com/v2/YOUR-API-KEY"
 const PRIVATE_KEY = process.env.PRIVATE_KEY
 const ETHERSCAN_API_KEY = process.env.ETHERSCAN_API_KEY || "Your etherscan API key"
 
@@ -32,12 +31,6 @@ const config: HardhatUserConfig = {
             saveDeployments: true,
             chainId: 11155111,
         },
-        goerli: {
-            url: GOERLI_RPC_URL,
-            accounts: PRIVATE_KEY !== undefined ? [PRIVATE_KEY] : [],
-            saveDeployments: true,
-            chainId: 5,
-        }
     },
     etherscan: {
         apiKey: ETHERSCAN_API_KEY
